@@ -1,0 +1,15 @@
+<h1>{{ title }}</h1>
+<ul>
+    @for (user of users; track user.id) {
+        <li>
+            {{ user.id }} - {{user.userName}}
+        </li>
+    }
+    
+    <!-- can also do this way:
+    <li *ngFor="let user of users" li>*ngFor="let user of users" going through the users array 
+        {{ user.id }} - {{user.userName}}  displaying the id and username 
+    </li>
+    -->
+    
+</ul>
