@@ -1,16 +1,15 @@
 using System;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")] //address/ api/users
-
-public class UsersController(DataContext context) : ControllerBase
+public class UsersController(DataContext context) : BaseApiController
 {
+    [AllowAnonymous] //this will allow anyone to access this endpoint
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
@@ -18,6 +17,7 @@ public class UsersController(DataContext context) : ControllerBase
         return users;
     }
 
+    [Authorize] //this will only allow authorized users to access this endpoint
     [HttpGet("{id:int}")] //api/users/{id}
     public async Task<ActionResult<AppUser>> GetUser(int id)
     {
